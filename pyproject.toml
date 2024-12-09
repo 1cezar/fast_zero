@@ -1,0 +1,36 @@
+[tool.poetry]
+name = "fast-zero"
+version = "0.1.0"
+description = ""
+authors = ["1cezar <cezaugusto.rocha@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = {extras = ["standard"], version = "^0.115.6"}
+
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.8.2"
+pytest = "^8.3.4"
+pytest-cov = "^6.0.0"
+taskipy = "^1.14.1"
+
+[tool.pytest.ini_options]
+pythonpath = "."
+addopts = "-p no:warnings"
+
+[tool.ruff]
+extend-exclude = ['migrations']
+
+[tool.ruff.lint]
+preview = true
+select = ['I', 'F', 'E', 'W', 'PL', 'PT']
+
+[tool.taskipy.tasks]
+run = "fastapi dev fast_zero/app.py"
+test = "pytest --cov=fast_zero -vv"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
